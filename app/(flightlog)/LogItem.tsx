@@ -1,5 +1,14 @@
-function LogItem(props) {
-  const { item } = props;
+import { useState } from "react";
+
+
+import { logItems } from "../interface/logItems";
+
+type Props = {
+  item : logItems,
+  key : string 
+}
+
+export default function LogItem({key,item} : Props) {
   return (
     <div style={{ display: "flex" }}>
       <span style={{ flex: 1 }}>{item.passengerName}</span>
@@ -12,4 +21,3 @@ function LogItem(props) {
   );
 }
 
-export default LogItem;

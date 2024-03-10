@@ -6,6 +6,11 @@ const emptyForm = {
   timestamp: "",
 };
 
+type Props = {
+  data : logItems[]
+}
+
+
 function LogForm(props) {
   const { type, onSubmit } = props;
 
