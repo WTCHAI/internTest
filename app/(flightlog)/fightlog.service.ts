@@ -19,7 +19,12 @@ export class FlightLogService {
       airport: "tokyo",
       timestamp: 1630454405,
       type: "arrival",
-    },
+    },{
+      passengerName: "sita",
+      airport: "donmunge",
+      timestamp: 1630630200,
+      type: "arrival",
+    }
   ];
 
   getLogs() : Promise<logItems[]>{
