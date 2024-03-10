@@ -1,20 +1,24 @@
 "use client";
 
 import { useCallback, useState, useEffect } from "react";
-import Image from "next/image";
+
+import { logItems } from "../interface/logItems";
+
 import styles from "./Home.module.css";
+
 import { FlightLogService } from "../(flightlog)/fightlog.service";
 import LogCard from "../(flightlog)/LogCard";
 import LogForm from "../(flightlog)/LogForm";
 // import BoardingPassCard from "../(boardingpass)/BoardingPassCard";
 
+
 const flightLogService = new FlightLogService();
 
 export default function Home() {
-  const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState<logItems[]>([]);
 
   const handleAddLog = useCallback(
-    (log) => {
+    (log : logItems) => {
       logs.push(log);
       setLogs(logs);
     },
@@ -23,8 +27,13 @@ export default function Home() {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await flightLogService.getLogs();
-      setLogs(data);
+      try{
+        const response : logItems[] = await flightLogService.getLogs();
+        setLogs(response);        
+      }catch {
+        console.log("error")
+      }
+
     };
 
     fetch();

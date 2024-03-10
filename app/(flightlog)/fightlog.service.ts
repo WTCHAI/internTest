@@ -1,5 +1,7 @@
+import { logItems } from "../interface/logItems";
+
 export class FlightLogService {
-  initialData = [
+  initialData : logItems[] = [
     {
       passengerName: "cherprang",
       airport: "bangkok",
@@ -20,11 +22,13 @@ export class FlightLogService {
     },
   ];
 
-  getLogs() {
+  getLogs() : Promise<logItems[]>{
     return new Promise(function (resolve) {
-      setTimeout(function () {
+
+      setTimeout( () => {
         resolve(this.initialData || []);
       }, 2000);
+
     });
   }
 }
