@@ -35,9 +35,10 @@ export default function Home() {
       const minutes = date.getMinutes();
       const seconds = date.getSeconds();
 
-      console.log(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`);
-
+      // console.log(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`)
+      alert(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`)
     })
+
   }
 
   // prepare data for avg paths 
@@ -93,7 +94,7 @@ export default function Home() {
             <a href="/" className="text-blue-600 hover:opacity-90 hover:scale-105">Next Airline!</a>
           </h1>
           <button
-            className="flex justify-center items-center bg-blue-500 text-md text-white px-[1vw] rounded-xl"
+            className="flex justify-center items-center bg-blue-500 text-md text-gray-200 font-medium px-[1vw] rounded-xl"
             onClick={flightAvgHandle}
            >
             Flight Avg time !

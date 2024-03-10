@@ -15,7 +15,7 @@ function LogCard( {data} : Props) {
 
   return (
     <div className="w-full flex flex-col bg-white">
-      <div className="flex flex-row justify-between items-center py-[1vh]">
+      <div className="flex flex-row justify-between items-center py-[1vh] pr-[1.25vw]">
         <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Passenger Name</span>
         <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Airport</span>
         <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Timestamp</span>
