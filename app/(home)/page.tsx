@@ -89,7 +89,7 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next Airline!</a>
+          Welcome to <a href="/">Next Airline!</a>
         </h1>
 
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
@@ -97,7 +97,7 @@ export default function Home() {
           <LogCard data={logs} ></LogCard>
         </div>
         <div className="w-full flex bg-black">
-          <button className="p-5 w-full"
+          <button className="p-5 w-full bg-gray-200"
           onClick={flightAvgHandle}>
             See logs Flight Avg time !
           </button>

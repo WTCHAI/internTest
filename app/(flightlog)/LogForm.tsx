@@ -28,6 +28,7 @@ function LogForm({type ,onSubmit} : Props) {
 
   return (
     <div style={{ display: "flex", columnGap: 8 }}>
+
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
@@ -88,7 +89,7 @@ function LogForm({type ,onSubmit} : Props) {
           }} />
       </div>
 
-      <div style={{ flex: 1, display: "flex", alignItems: "flex-end" }}>
+      <div style={{ flex: 1, display: "flex", alignItems: "flex-end" ,width : "100%"}}>
         <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
