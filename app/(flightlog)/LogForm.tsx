@@ -90,6 +90,7 @@ function LogForm({type ,onSubmit} : Props) {
           name="timestamp"
           value={formData.timestamp}
           className="py-[1vh] px-[2vw] rounded-xl shadow-sm"
+          placeholder="time stamp "
           onChange={(e)=>{
             setFormData({
               ...formData,

@@ -87,8 +87,8 @@ export default function Home() {
   }, [])
 
   return (
-      <main className='flex flex-col h-full w-full gap-y-[3vh] bg-gray-50 pb-[5vh]'>
-        <header className="flex flex-row justify-between bg-sky-100 px-[2vw] py-[3vh]">
+      <main className='flex flex-col h-full w-full gap-y-[3vh] bg-gray-50 pb-[10vh]'>
+        <header className="flex flex-row justify-between bg-sky-100 px-[2vw] py-[3vh] border-b-blue-200 shadow-sm">
           <h1 className='flex items-center  text-5xl gap-x-[2vw] tracking-tight leading-tight'>
             <p className="text-gray-600">Welcome to</p>
             <a href="/" className="text-blue-600 hover:opacity-90 hover:scale-105">Next Airline!</a>
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
 
-       <div className='flex flex-col px-[2vw]'>
+       <div className='flex flex-col px-[2vw] '>
           <h1 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Flights History</h1>
           <LogCard data={logs} ></LogCard>
         </div>
