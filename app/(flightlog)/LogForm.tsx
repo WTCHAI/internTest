@@ -6,7 +6,7 @@ import { logItems } from "../interface/logItems";
 const emptyForm : logItems= {
   passengerName: "",
   airport: "",
-  timestamp: 0,
+  timestamp: "",
   type : ""
 };
 
@@ -25,8 +25,6 @@ function LogForm({type ,onSubmit} : Props) {
     onSubmit({ ...formData, type });
     setFormData(emptyForm);
   }, [formData, type, onSubmit]);
-
-
 
   return (
     <div style={{ display: "flex", columnGap: 8 }}>
@@ -50,6 +48,7 @@ function LogForm({type ,onSubmit} : Props) {
           }}
         />
       </div>
+
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
@@ -67,8 +66,9 @@ function LogForm({type ,onSubmit} : Props) {
               ...formData,
               airport : e.target.value
             })
-          }}        />
+          }}/>
       </div>
+
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
@@ -76,17 +76,18 @@ function LogForm({type ,onSubmit} : Props) {
           Timestamp:
         </label>
         <input
-          type="number"
+          type="text"
           id="timestamp"
           name="timestamp"
           value={formData.timestamp}
           onChange={(e)=>{
             setFormData({
               ...formData,
-              timestamp : parseInt(e.target.value)
+              timestamp : e.target.value
             })
           }} />
       </div>
+
       <div style={{ flex: 1, display: "flex", alignItems: "flex-end" }}>
         <button onClick={handleSubmit}>Submit</button>
       </div>

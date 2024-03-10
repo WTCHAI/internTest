@@ -17,50 +17,51 @@ const flightLogService = new FlightLogService();
 export default function Home() {
   const [logs, setLogs] = useState<logItems[]>([]);
   
-  const [flightPath, onSetFlightLogs] = useState<any>([
-    
-  ])
-  
+  const [flightPath, setFlightPath] = useState<{ [key: string]: number[] }>({});
+  const [userMem,onSetMem] = useState<{ [key: string]: boolean }>({})
+
   const handleAddLog = (log : logItems)=>{
     const updatedLog : logItems[] = [...logs,log]
     setLogs(updatedLog); 
   }
 
   const flightAvgHandle = () => {
-    // onPrepareLogs()
     //after knowing what flight was arrive mean it must already succeed
-    
+    console.log(flightPath)
   }
 
-  // prepare dat afor avg paths 
+  // prepare data for avg paths 
   useEffect(()=>{
-    const arrivesLog = logs.filter((e)=>e.type === "arrival")
-    // console.log(arrivesLog)
+    const arrivesLogs = logs.filter((e)=>e.type === "arrival")
+    const departureLogs = logs.filter((e)=>e.type === "departure")
+    
+    arrivesLogs.map((arrivelog )=>{
+      departureLogs.map((departurelog )=>{
+        if (arrivelog.passengerName === departurelog.passengerName){
+            let calTimeUsed = (parseInt(arrivelog.timestamp)*1000) - (parseInt(departurelog.timestamp)*1000)
+            const targetPath = `${departurelog.airport}-${arrivelog.airport}`
+            if (flightPath[`${targetPath}`] && !userMem[arrivelog.passengerName]){
+              // path already valid 
+              setFlightPath((prevState) => ({
+                ...prevState,
+                [targetPath]: [...prevState[targetPath], calTimeUsed],
+              }))
+            } else {
+              // creating new path
+              setFlightPath((prevState) => ({
+                ...prevState,
+                [targetPath]: [calTimeUsed]
+              }))
+              onSetMem((prevState)=>({
+                ...prevState,
+                [arrivelog.passengerName] : true
+              }))
 
-    logs.forEach(log => {
-      // loop though log find case is log have valid on arrive log if yes creating find avg prepare now O(n*(n/2)) 
-      // or u can change all current data structure to optimize later 
-      arrivesLog.map(arrivelog =>{
-        if (arrivelog.passengerName === log.passengerName && log.type === "departure"){
-          // console.log("Have arrival log for", log.passengerName, "and type" , log.type)
-          // creating path data 
-          let calTimeUsed = (arrivelog.timestamp*1000) - (log.timestamp*1000)
-          // Convert the time difference to a human-readable format
-          const hours = Math.floor(calTimeUsed / (1000 * 60 * 60));
-          const minutes = Math.floor((calTimeUsed % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((calTimeUsed % (1000 * 60)) / 1000);
-
-          console.log(`${hours} hours, ${minutes} minutes, ${seconds} seconds`);
-          onSetFlightLogs([
-            ...flightPath,
-            {
-              path : `${log.airport}-${arrivelog.airport}`,
-              // timeUsed :
             }
-          ])
+
         }
       })
-    });
+    })
 
   },[logs])
 
@@ -68,7 +69,8 @@ export default function Home() {
     const fetch = async () => {
       try{
         const response : logItems[] = await flightLogService.getLogs();
-        setLogs(response);      
+        setLogs(response);
+
       }catch {
         console.log("error")
       }
