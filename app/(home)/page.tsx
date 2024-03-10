@@ -27,7 +27,16 @@ export default function Home() {
 
   const flightAvgHandle = () => {
     //after knowing what flight was arrive mean it must already succeed
-    console.log(flightPath)
+    // console.log(flightPath)
+    Object.entries(flightPath).forEach(([key, value]) => {
+      console.log("Key:", key);
+      console.log("Value:", value);
+  
+      // Iterate through the value array
+      value.forEach((time) => {
+        console.log("Time used:", time);
+      });
+    });
   }
 
   // prepare data for avg paths 
