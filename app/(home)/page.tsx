@@ -87,7 +87,7 @@ export default function Home() {
   }, [])
 
   return (
-      <main className='flex flex-col w-full gap-y-[3vh] bg-gray-50'>
+      <main className='flex flex-col h-full w-full gap-y-[3vh] bg-gray-50 pb-[5vh]'>
         <header className="flex flex-row justify-between bg-sky-100 px-[2vw] py-[3vh]">
           <h1 className='flex items-center  text-5xl gap-x-[2vw] tracking-tight leading-tight'>
             <p className="text-gray-600">Welcome to</p>
@@ -101,29 +101,32 @@ export default function Home() {
           </button>
         </header>
 
-        <div className='flex flex-col px-[2vw]'>
+        <div className="flex flex-row w-full h-full">
+          <div className='flex flex-col px-[2vw] w-full'>
+            <h2 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Departure Logging</h2>
+            <LogForm
+              style={{ width: "100%" }}
+              data={logs}
+              type={"departure"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>
+
+          <div className='flex flex-col px-[2vw] w-full'>
+            <h2 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Arrival Logging</h2>
+            <LogForm
+              style={{ width: "100%" }}
+              data={logs}
+              type={"arrival"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>          
+        </div>
+
+
+       <div className='flex flex-col px-[2vw]'>
           <h1 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Flights History</h1>
           <LogCard data={logs} ></LogCard>
-        </div>
-
-        <div className=''>
-          <h2>Departure Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"departure"}
-            onSubmit={handleAddLog}
-          ></LogForm>
-        </div>
-
-        <div className=''>
-          <h2>Arrival Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"arrival"}
-            onSubmit={handleAddLog}
-          ></LogForm>
         </div>
 
         {/* Render boarding pass here */}
