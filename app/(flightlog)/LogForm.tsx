@@ -22,24 +22,30 @@ function LogForm({type ,onSubmit} : Props) {
   const [formData, setFormData] = useState<logItems>(emptyForm);
 
   const handleSubmit = useCallback(() => {
-    onSubmit({ ...formData, type });
-    setFormData(emptyForm);
+    if (formData.airport != "" && formData.passengerName != "" && formData.timestamp != ""){
+      onSubmit({ ...formData, type });
+      setFormData(emptyForm);      
+    }
   }, [formData, type, onSubmit]);
 
+  const isFormValid = formData.airport && formData.passengerName && parseInt(formData.timestamp);
+
+
   return (
-    <div style={{ display: "flex", columnGap: 8 }}>
+    <div className="flex flex-col h-full gap-y-[1vh]">
 
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
-        <label htmlFor="pname" style={{ fontWeight: "bold" }}>
-          Passenger Name:
+        <label htmlFor="pname" className="text-lg font-medium text-gray-600">
+          Passenger Name :
         </label>
         <input
           type="text"
           id="pname"
           name="pname"
           placeholder="eg. Somechai"
+          className="py-[1vh] px-[2vw] rounded-xl shadow-sm"
           value={formData.passengerName}
           onChange={(e)=>{
             setFormData({
@@ -53,14 +59,16 @@ function LogForm({type ,onSubmit} : Props) {
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
-        <label htmlFor="airport" style={{ fontWeight: "bold" }}>
-          Airport:
+        <label htmlFor="airport" className="text-lg font-medium text-gray-600">
+          Airport :
         </label>
         <input
           type="text"
           id="airport"
           name="airport"
           placeholder="eg. suvarnabhumi "
+          className="py-[1vh] px-[2vw] rounded-xl shadow-sm"
+
           value={formData.airport}
           onChange={(e)=>{
             setFormData({
@@ -73,14 +81,16 @@ function LogForm({type ,onSubmit} : Props) {
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
       >
-        <label htmlFor="timestamp" style={{ fontWeight: "bold" }}>
-          Timestamp:
+        <label htmlFor="timestamp" className="text-lg font-medium text-gray-600">
+          Timestamp :
         </label>
         <input
           type="text"
           id="timestamp"
           name="timestamp"
           value={formData.timestamp}
+          className="py-[1vh] px-[2vw] rounded-xl shadow-sm"
+          placeholder="time stamp "
           onChange={(e)=>{
             setFormData({
               ...formData,
@@ -89,8 +99,12 @@ function LogForm({type ,onSubmit} : Props) {
           }} />
       </div>
 
-      <div style={{ flex: 1, display: "flex", alignItems: "flex-end" ,width : "100%"}}>
-        <button onClick={handleSubmit}>Submit</button>
+      <div className="flex justify-center items-center mt-[1vh]">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-gray-200 font-medium py-[0.5vh] px-[1vw] rounded-lg hover:opacity-95 shadow-md disabled:cursor-not-allowed"
+          disabled={!isFormValid}
+        >Submit</button>
       </div>
     </div>
   );

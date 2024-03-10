@@ -4,7 +4,7 @@ import {  useState, useEffect } from "react";
 
 import { logItems } from "../interface/logItems";
 
-import styles from "./Home.module.css";
+// import styles from "./Home.module.css";
 
 import { FlightLogService } from "../(flightlog)/fightlog.service";
 import LogCard from "../(flightlog)/LogCard";
@@ -16,9 +16,12 @@ const flightLogService = new FlightLogService();
 
 export default function Home() {
   const [logs, setLogs] = useState<logItems[]>([]);
-  // finding average path handering 
+  // finding average path data state handering 
   const [flightPath, setFlightPath] = useState<{ [key: string]: number}>({});
   const [userMem,onSetUser] = useState<{ [key: string]: boolean}>({})
+
+  // boarding data state
+  
 
   const handleAddLog = (log : logItems)=>{
     const updatedLog : logItems[] = [...logs,log]
@@ -35,9 +38,10 @@ export default function Home() {
       const minutes = date.getMinutes();
       const seconds = date.getSeconds();
 
-      console.log(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`);
-
+      // console.log(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`)
+      alert(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`)
     })
+
   }
 
   // prepare data for avg paths 
@@ -70,7 +74,7 @@ export default function Home() {
     })
 
   },[logs])
-
+  //initial get logs history
   useEffect(() => {
     const fetch = async () => {
       try{
@@ -86,40 +90,46 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="/">Next Airline!</a>
-        </h1>
-
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Flight Logs here</h2>
-          <LogCard data={logs} ></LogCard>
-        </div>
-        <div className="w-full flex bg-black">
-          <button className="p-5 w-full bg-gray-200"
-          onClick={flightAvgHandle}>
-            See logs Flight Avg time !
+      <main className='flex flex-col h-full w-full gap-y-[3vh] bg-gray-50 pb-[10vh]'>
+        <header className="flex flex-row justify-between bg-sky-100 px-[2vw] py-[3vh] border-b-blue-200 shadow-sm">
+          <h1 className='flex items-center  text-5xl gap-x-[2vw] tracking-tight leading-tight'>
+            <p className="text-gray-600">Welcome to</p>
+            <a href="/" className="text-blue-600 hover:opacity-90 hover:scale-105">Next Airline!</a>
+          </h1>
+          <button
+            className="flex justify-center items-center bg-blue-500 text-md text-gray-200 font-medium px-[1vw] rounded-xl"
+            onClick={flightAvgHandle}
+           >
+            Flight Avg time !
           </button>
-        </div>
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Departure Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"departure"}
-            onSubmit={handleAddLog}
-          ></LogForm>
+        </header>
+
+        <div className="flex flex-row w-full h-full">
+          <div className='flex flex-col px-[2vw] w-full'>
+            <h2 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Departure Logging</h2>
+            <LogForm
+              style={{ width: "100%" }}
+              data={logs}
+              type={"departure"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>
+
+          <div className='flex flex-col px-[2vw] w-full'>
+            <h2 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Arrival Logging</h2>
+            <LogForm
+              style={{ width: "100%" }}
+              data={logs}
+              type={"arrival"}
+              onSubmit={handleAddLog}
+            ></LogForm>
+          </div>          
         </div>
 
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Arrival Logging</h2>
-          <LogForm
-            style={{ width: "100%" }}
-            data={logs}
-            type={"arrival"}
-            onSubmit={handleAddLog}
-          ></LogForm>
+
+       <div className='flex flex-col px-[2vw] '>
+          <h1 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Flights History</h1>
+          <LogCard data={logs} ></LogCard>
         </div>
 
         {/* Render boarding pass here */}
@@ -127,6 +137,5 @@ export default function Home() {
         {/*   <BoardingPassCard key={i} /> */}
         {/* ))} */}
       </main>
-    </div>
   );
 }
