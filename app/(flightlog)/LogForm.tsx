@@ -1,32 +1,32 @@
 import { useState, useCallback } from "react";
 
-const emptyForm = {
+import { logItems } from "../interface/logItems";
+
+
+const emptyForm : logItems= {
   passengerName: "",
   airport: "",
   timestamp: "",
+  type : ""
 };
 
 type Props = {
-  data : logItems[]
+  style : any,
+  data : logItems[],
+  type : string ,
+  onSubmit : (data : logItems)=>void
 }
 
 
-function LogForm(props) {
-  const { type, onSubmit } = props;
-
-  const [formData, setFormData] = useState(emptyForm);
+function LogForm({type ,onSubmit} : Props) {
+  const [formData, setFormData] = useState<logItems>(emptyForm);
 
   const handleSubmit = useCallback(() => {
     onSubmit({ ...formData, type });
     setFormData(emptyForm);
   }, [formData, type, onSubmit]);
 
-  const handleChange = useCallback(({ target }) => {
-    setFormData((prev) => ({
-      ...prev,
-      [target.id]: target.value,
-    }));
-  }, []);
+
 
   return (
     <div style={{ display: "flex", columnGap: 8 }}>
@@ -41,7 +41,12 @@ function LogForm(props) {
           id="pname"
           name="pname"
           value={formData.passengerName}
-          onChange={handleChange}
+          onChange={(e)=>{
+            setFormData({
+              ...formData,
+              passengerName : e.target.value
+            })
+          }}
         />
       </div>
       <div
@@ -55,8 +60,12 @@ function LogForm(props) {
           id="airport"
           name="airport"
           value={formData.airport}
-          onChange={handleChange}
-        />
+          onChange={(e)=>{
+            setFormData({
+              ...formData,
+              airport : e.target.value
+            })
+          }}        />
       </div>
       <div
         style={{ flex: 1, display: "flex", flexDirection: "column", rowGap: 4 }}
@@ -69,8 +78,12 @@ function LogForm(props) {
           id="timestamp"
           name="timestamp"
           value={formData.timestamp}
-          onChange={handleChange}
-        />
+          onChange={(e)=>{
+            setFormData({
+              ...formData,
+              timestamp : e.target.value
+            })
+          }} />
       </div>
       <div style={{ flex: 1, display: "flex", alignItems: "flex-end" }}>
         <button onClick={handleSubmit}>Submit</button>

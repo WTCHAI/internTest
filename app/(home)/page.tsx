@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState, useEffect } from "react";
+import {  useState, useEffect } from "react";
 
 import { logItems } from "../interface/logItems";
 
@@ -17,13 +17,12 @@ const flightLogService = new FlightLogService();
 export default function Home() {
   const [logs, setLogs] = useState<logItems[]>([]);
 
-  const handleAddLog = useCallback(
-    (log : logItems) => {
-      logs.push(log);
-      setLogs(logs);
-    },
-    [logs]
-  );
+
+  const handleAddLog = (log : logItems)=>{
+    const updatedLog : logItems[] = logs.push(log)
+    console.log(updatedLog)
+    setLogs(updatedLog); 
+  }
 
   useEffect(() => {
     const fetch = async () => {

@@ -1,8 +1,8 @@
 
 export interface logItems  {
-        passengerName: string ,
-        airport: string,
-        timestamp: number,
-        type: string
+    passengerName: string ,
+    airport: string,
+    timestamp: number | string,
+    type: string
       
 }
