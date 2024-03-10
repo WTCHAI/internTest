@@ -27,16 +27,17 @@ export default function Home() {
 
   const flightAvgHandle = () => {
     //after knowing what flight was arrive mean it must already succeed
-    console.log(flightPath)
-    // Object.entries(flightPath).forEach(([key, value]) => {
-    //   console.log("Key:", key);
-    //   console.log("Value:", value);
-  
-    //   // Iterate through the value array
-    //   // value.forEach((time) => {
-    //   //   console.log("Time used:", time);
-    //   // });
-    // });
+    Object.entries(flightPath).forEach(([key, value]) => {
+      const path  = key.split('-')
+      const date = new Date(value * 1000);
+      
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();
+
+      console.log(`From ${path[0]} to ${path[1]} : ${hours === 0 ? '': `${hours} hours`} ${minutes === 0 ? '': `${minutes} minutes`} ${seconds === 0 ? '': `${seconds} seconds`}`);
+
+    })
   }
 
   // prepare data for avg paths 
