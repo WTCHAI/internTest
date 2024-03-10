@@ -16,9 +16,9 @@ const flightLogService = new FlightLogService();
 
 export default function Home() {
   const [logs, setLogs] = useState<logItems[]>([]);
-  
-  const [flightPath, setFlightPath] = useState<{ [key: string]: number[] }>({});
-  const [userMem,onSetMem] = useState<{ [key: string]: boolean }>({})
+  // finding average path handering 
+  const [flightPath, setFlightPath] = useState<{ [key: string]: number}>({});
+  const [userMem,onSetUser] = useState<{ [key: string]: boolean}>({})
 
   const handleAddLog = (log : logItems)=>{
     const updatedLog : logItems[] = [...logs,log]
@@ -27,16 +27,16 @@ export default function Home() {
 
   const flightAvgHandle = () => {
     //after knowing what flight was arrive mean it must already succeed
-    // console.log(flightPath)
-    Object.entries(flightPath).forEach(([key, value]) => {
-      console.log("Key:", key);
-      console.log("Value:", value);
+    console.log(flightPath)
+    // Object.entries(flightPath).forEach(([key, value]) => {
+    //   console.log("Key:", key);
+    //   console.log("Value:", value);
   
-      // Iterate through the value array
-      value.forEach((time) => {
-        console.log("Time used:", time);
-      });
-    });
+    //   // Iterate through the value array
+    //   // value.forEach((time) => {
+    //   //   console.log("Time used:", time);
+    //   // });
+    // });
   }
 
   // prepare data for avg paths 
@@ -46,28 +46,21 @@ export default function Home() {
     
     arrivesLogs.map((arrivelog )=>{
       departureLogs.map((departurelog )=>{
-        if (arrivelog.passengerName === departurelog.passengerName){
+        if (arrivelog.passengerName === departurelog.passengerName && !userMem[arrivelog.passengerName]){
             let calTimeUsed = (parseInt(arrivelog.timestamp)*1000) - (parseInt(departurelog.timestamp)*1000)
             const targetPath = `${departurelog.airport}-${arrivelog.airport}`
-            if (flightPath[`${targetPath}`] && !userMem[arrivelog.passengerName]){
-              // path already valid 
-              setFlightPath((prevState) => ({
-                ...prevState,
-                [targetPath]: [...prevState[targetPath], calTimeUsed],
-              }))
-            } else {
-              // creating new path
-              setFlightPath((prevState) => ({
-                ...prevState,
-                [targetPath]: [calTimeUsed]
-              }))
-              onSetMem((prevState)=>({
-                ...prevState,
-                [arrivelog.passengerName] : true
-              }))
+            
+            setFlightPath((prevState) => ({
+              ...prevState,
+              [targetPath]: prevState[targetPath]
+                ? (calTimeUsed + prevState[targetPath])/2
+                : calTimeUsed,
+            }))
 
-            }
-
+            onSetUser(prevState=>({
+              ...prevState,
+              [arrivelog.passengerName] : true
+            }))
         }
       })
     })
