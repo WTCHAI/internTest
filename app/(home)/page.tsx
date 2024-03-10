@@ -4,7 +4,7 @@ import {  useState, useEffect } from "react";
 
 import { logItems } from "../interface/logItems";
 
-import styles from "./Home.module.css";
+// import styles from "./Home.module.css";
 
 import { FlightLogService } from "../(flightlog)/fightlog.service";
 import LogCard from "../(flightlog)/LogCard";
@@ -86,23 +86,26 @@ export default function Home() {
   }, [])
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="/">Next Airline!</a>
-        </h1>
+      <main className='flex flex-col w-full gap-y-[3vh] bg-gray-50'>
+        <header className="flex flex-row justify-between bg-sky-100 px-[2vw] py-[3vh]">
+          <h1 className='flex items-center  text-5xl gap-x-[2vw] tracking-tight leading-tight'>
+            <p className="text-gray-600">Welcome to</p>
+            <a href="/" className="text-blue-600 hover:opacity-90 hover:scale-105">Next Airline!</a>
+          </h1>
+          <button
+            className="flex justify-center items-center bg-blue-500 text-md text-white px-[1vw] rounded-xl"
+            onClick={flightAvgHandle}
+           >
+            Flight Avg time !
+          </button>
+        </header>
 
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Flight Logs here</h2>
+        <div className='flex flex-col px-[2vw]'>
+          <h1 className="text-3xl font-medium text-blue-500 mb-[3vh] ml-[2vw]">Flights History</h1>
           <LogCard data={logs} ></LogCard>
         </div>
-        <div className="w-full flex bg-black">
-          <button className="p-5 w-full bg-gray-200"
-          onClick={flightAvgHandle}>
-            See logs Flight Avg time !
-          </button>
-        </div>
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
+
+        <div className=''>
           <h2>Departure Logging</h2>
           <LogForm
             style={{ width: "100%" }}
@@ -112,7 +115,7 @@ export default function Home() {
           ></LogForm>
         </div>
 
-        <div className={styles.card} style={{ margin: 16, width: "100%" }}>
+        <div className=''>
           <h2>Arrival Logging</h2>
           <LogForm
             style={{ width: "100%" }}
@@ -127,6 +130,5 @@ export default function Home() {
         {/*   <BoardingPassCard key={i} /> */}
         {/* ))} */}
       </main>
-    </div>
   );
 }

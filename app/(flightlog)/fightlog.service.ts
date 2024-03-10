@@ -23,17 +23,17 @@ export class FlightLogService {
       timestamp: '1630630200',
       type: "arrival",
     },
-    // {
-    //   passengerName: "some chai",
-    //   airport: "bangkok",
-    //   timestamp: '1630554400',
-    //   type: "departure",
-    // },{
-    //   passengerName: "some chai",
-    //   airport: "tokyo",
-    //   timestamp: '1630754400',
-    //   type: "arrival",
-    // }
+    {
+      passengerName: "some chai",
+      airport: "bangkok",
+      timestamp: '1630554400',
+      type: "departure",
+    },{
+      passengerName: "some chai",
+      airport: "tokyo",
+      timestamp: '1630754400',
+      type: "arrival",
+    }
   ];
 
   getLogs() : Promise<logItems[]>{

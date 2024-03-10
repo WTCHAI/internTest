@@ -14,25 +14,23 @@ function LogCard( {data} : Props) {
   }, [data]);
 
   return (
-    <div
-      className="w-full flex flex-col gap-x-4"
-    >
-      <div
-        style={{
-          display: "flex",
-          marginBottom: 4,
-          fontSize: 16,
-          fontWeight: "bold",
-        }}
-      >
-        <span style={{ flex: 1 }}>Passenger Name</span>
-        <span style={{ flex: 1 }}>Airport</span>
-        <span style={{ flex: 1 }}>Timestamp</span>
-        <span style={{ flex: 1 }}>Type</span>
+    <div className="w-full flex flex-col bg-white">
+      <div className="flex flex-row justify-between items-center py-[1vh]">
+        <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Passenger Name</span>
+        <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Airport</span>
+        <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Timestamp</span>
+        <span className="flex justify-center w-full text-gray-600 text-xl font-semibold">Type</span>
       </div>
-      {logs.map((item : logItems) => (
-        <LogItem key={`${item.passengerName}`} item={item}></LogItem>
-      ))}
+      <ul className="flex flex-col h-full justify-center max-h-[30vh] overflow-y-scroll">
+        {logs.map((item : logItems) => {
+          return(
+            <li className="border-b-2 hover:bg-sky-50">
+              <LogItem key={`${item.passengerName}`} item={item}></LogItem>
+            </li>
+          )
+        })}        
+      </ul>
+
     </div>
   );
 }

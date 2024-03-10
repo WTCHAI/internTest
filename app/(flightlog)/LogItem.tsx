@@ -10,11 +10,11 @@ type Props = {
 
 export default function LogItem({key,item} : Props) {
   return (
-    <div style={{ display: "flex" }}>
-      <span style={{ flex: 1 }}>{item.passengerName}</span>
-      <span style={{ flex: 1 }}>{item.airport}</span>
-      <span style={{ flex: 1 }}>{item.timestamp}</span>
-      <span style={{ flex: 1 }}>
+    <div className="flex flex-row h-full justify-center items-center py-[2vh]">
+      <span className="flex justify-center w-full text-gray-500 text-base font-medium"><p>{item.passengerName}</p></span>
+      <span className="flex justify-center w-full text-gray-500 text-base font-medium">{item.airport}</span>
+      <span className="flex justify-center w-full text-gray-500 text-base font-medium">{item.timestamp}</span>
+      <span className="flex justify-center w-full text-gray-500 text-base font-medium">
         {item.type === "departure" ? "Departure" : "Arrival"}
       </span>
     </div>
