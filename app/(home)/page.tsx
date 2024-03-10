@@ -16,9 +16,12 @@ const flightLogService = new FlightLogService();
 
 export default function Home() {
   const [logs, setLogs] = useState<logItems[]>([]);
-  // finding average path handering 
+  // finding average path data state handering 
   const [flightPath, setFlightPath] = useState<{ [key: string]: number}>({});
   const [userMem,onSetUser] = useState<{ [key: string]: boolean}>({})
+
+  // boarding data state
+  
 
   const handleAddLog = (log : logItems)=>{
     const updatedLog : logItems[] = [...logs,log]
@@ -71,7 +74,7 @@ export default function Home() {
     })
 
   },[logs])
-
+  //initial get logs history
   useEffect(() => {
     const fetch = async () => {
       try{

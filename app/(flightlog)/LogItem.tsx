@@ -9,8 +9,11 @@ type Props = {
 }
 
 export default function LogItem({key,item} : Props) {
+
   return (
-    <div className="flex flex-row h-full justify-center items-center py-[2vh]">
+    <div
+      className="flex flex-row h-full justify-center items-center py-[2vh]"
+    >
       <span className="flex justify-center w-full text-gray-500 text-base font-medium"><p>{item.passengerName}</p></span>
       <span className="flex justify-center w-full text-gray-500 text-base font-medium">{item.airport}</span>
       <span className="flex justify-center w-full text-gray-500 text-base font-medium">{item.timestamp}</span>
