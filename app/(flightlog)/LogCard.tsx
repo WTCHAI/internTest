@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import LogItem from "./LogItem";
+import { logItems } from "../interface/logItems";
 
-function LogCard(props) {
-  const { data } = props;
+type Props = {
+  data : logItems[]
+}
+
+function LogCard( {data} : Props) {
   const [logs, setLogs] = useState(data);
 
   useEffect(() => {
@@ -11,11 +15,7 @@ function LogCard(props) {
 
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        rowGap: 4,
-      }}
+      className="w-full flex flex-col gap-x-4"
     >
       <div
         style={{
@@ -30,7 +30,7 @@ function LogCard(props) {
         <span style={{ flex: 1 }}>Timestamp</span>
         <span style={{ flex: 1 }}>Type</span>
       </div>
-      {logs.map((item) => (
+      {logs.map((item : logItems) => (
         <LogItem key={`${item.passengerName}`} item={item}></LogItem>
       ))}
     </div>

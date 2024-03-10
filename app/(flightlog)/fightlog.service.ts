@@ -23,7 +23,7 @@ export class FlightLogService {
   ];
 
   getLogs() : Promise<logItems[]>{
-    return new Promise(function (resolve) {
+    return new Promise( (resolve) => {
 
       setTimeout( () => {
         resolve(this.initialData || []);

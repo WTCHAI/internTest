@@ -29,11 +29,10 @@ export default function Home() {
     const fetch = async () => {
       try{
         const response : logItems[] = await flightLogService.getLogs();
-        setLogs(response);        
+        setLogs(response);      
       }catch {
         console.log("error")
       }
-
     };
 
     fetch();
@@ -49,10 +48,12 @@ export default function Home() {
           Get started by editing{" "}
           <code className={styles.code}>app/(home)/page.tsx</code>
         </p>
+
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
-          <h2>Flight Logs</h2>
-          <LogCard style={{ width: "100%" }} data={logs}></LogCard>
+          <h2>Flight Logs here</h2>
+          <LogCard data={logs} ></LogCard>
         </div>
+
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
           <h2>Departure Logging</h2>
           <LogForm
@@ -62,6 +63,7 @@ export default function Home() {
             onSubmit={handleAddLog}
           ></LogForm>
         </div>
+
         <div className={styles.card} style={{ margin: 16, width: "100%" }}>
           <h2>Arrival Logging</h2>
           <LogForm
