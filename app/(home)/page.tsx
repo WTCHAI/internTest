@@ -19,8 +19,7 @@ export default function Home() {
 
 
   const handleAddLog = (log : logItems)=>{
-    const updatedLog : logItems[] = logs.push(log)
-    console.log(updatedLog)
+    const updatedLog : logItems[] = [...logs,log]
     setLogs(updatedLog); 
   }
 
